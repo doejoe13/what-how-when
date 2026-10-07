@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What Time Is It? — Live Clock & Your Time Zone</title>
+<meta name="description" content="See the current time, live, in your local time zone.">
+<link rel="canonical" href="https://what-how-when.top/what/is-the-time/">
+<link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+<nav class="breadcrumb"><a href="/">← Most Useful Webpage in the Universe</a></nav>
+<main class="subpage">
+  <h1>What time is it?</h1>
+  <div class="quick-answer"><strong>Current time:</strong> <span id="clock">Loading…</span></div>
+  <section>
+    <h2>Details</h2>
+    <p>Your time zone: <strong id="tz">—</strong>.</p>
+    <p>This clock reads your device's local time and updates every second.</p>
+  </section>
+</main>
+<footer class="site-footer"><p>© <span id="year"></span> what-how-when.top</p></footer>
+<script>
+  const tick = () => {
+    document.getElementById('clock').textContent = new Date().toLocaleTimeString(undefined, {
+      hour: '2-digit', minute: '2-digit', second: '2-digit', timeZoneName: 'short'
+    });
+  };
+  tick();
+  setInterval(tick, 1000);
+  document.getElementById('tz').textContent = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

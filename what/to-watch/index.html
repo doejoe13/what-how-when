@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What to Watch? — A Suggestion Right Now</title>
+<meta name="description" content="Get a what-to-watch suggestion based on the time of day.">
+<link rel="canonical" href="https://what-how-when.top/what/to-watch/">
+<link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+<nav class="breadcrumb"><a href="/">← Most Useful Webpage in the Universe</a></nav>
+<main class="subpage">
+  <h1>What to watch?</h1>
+  <div class="quick-answer"><strong>Try:</strong> <span id="sug">Loading…</span></div>
+  <button onclick="pick()" style="margin-top:1rem;padding:.5rem 1rem;border-radius:8px;border:1px solid #334155;background:#1e293b;color:#e2e8f0;cursor:pointer;">Another suggestion</button>
+  <section>
+    <h2>How this works</h2>
+    <p>Based on the hour of day on your device, we pick a category that fits: light content in the morning, something gripping in the evening, wind-down shows at night.</p>
+  </section>
+</main>
+<footer class="site-footer"><p>© <span id="year"></span> what-how-when.top</p></footer>
+<script>
+  function pick() {
+    const h = new Date().getHours();
+    const s = {
+      morning:   ['A documentary', 'A comedy series', 'A short film', 'A nature documentary'],
+      afternoon: ['An action movie', 'A sci-fi series', 'A thriller', 'A superhero film'],
+      evening:   ['A drama', 'A classic film', 'A stand-up special', 'A mystery series'],
+      night:     ['A mystery series', 'An anime', 'A late-night talk show', 'A horror film']
+    };
+    const k = h < 12 ? 'morning' : h < 17 ? 'afternoon' : h < 22 ? 'evening' : 'night';
+    const l = s[k];
+    document.getElementById('sug').textContent = l[Math.floor(Math.random() * l.length)];
+  }
+  pick();
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

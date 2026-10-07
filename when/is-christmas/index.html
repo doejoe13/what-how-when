@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How Many Days Until Christmas? — Live Countdown</title>
+<meta name="description" content="Live countdown to Christmas Day. Days, hours, minutes, and seconds until December 25.">
+<link rel="canonical" href="https://what-how-when.top/when/is-christmas/">
+<link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+<nav class="breadcrumb"><a href="/">← Most Useful Webpage in the Universe</a></nav>
+<main class="subpage">
+  <h1>How many days until Christmas?</h1>
+  <div class="quick-answer" id="countdown">Loading…</div>
+  <section>
+    <h2>Next Christmas</h2>
+    <p>Christmas Day is <strong>December 25</strong>. The countdown above updates live.</p>
+  </section>
+</main>
+<footer class="site-footer"><p>© <span id="year"></span> what-how-when.top</p></footer>
+<script>
+  function nextChristmas() {
+    const now = new Date();
+    const year = now.getMonth() === 11 && now.getDate() > 25 ? now.getFullYear() + 1 : now.getFullYear();
+    return new Date(year, 11, 25, 0, 0, 0);
+  }
+  function tick() {
+    const target = nextChristmas();
+    const diff = target - new Date();
+    if (diff <= 0) { document.getElementById('countdown').textContent = '🎄 Merry Christmas!'; return; }
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    document.getElementById('countdown').textContent = d + ' days, ' + h + ' hours, ' + m + ' min, ' + s + ' sec';
+  }
+  tick();
+  setInterval(tick, 1000);
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

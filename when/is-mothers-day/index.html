@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>When Is Mother's Day? — US Date for Any Year</title>
+<meta name="description" content="Mother's Day date in the United States: the second Sunday in May. Calculated live for any year.">
+<link rel="canonical" href="https://what-how-when.top/when/is-mothers-day/">
+<link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+<nav class="breadcrumb"><a href="/">← Most Useful Webpage in the Universe</a></nav>
+<main class="subpage">
+  <h1>When is Mother's Day?</h1>
+  <div class="quick-answer"><strong>Mother's Day this year (US):</strong> <span id="md">…</span></div>
+  <section>
+    <h2>Rule</h2>
+    <p>In the United States, Mother's Day is the <strong>second Sunday of May</strong>. In the UK and Ireland it's <em>Mothering Sunday</em>, the fourth Sunday of Lent — a different date.</p>
+  </section>
+</main>
+<footer class="site-footer"><p>© <span id="year"></span> what-how-when.top</p></footer>
+<script>
+  function nthSunday(year, month, n) {
+    const first = new Date(year, month, 1);
+    const offset = (7 - first.getDay()) % 7;
+    return new Date(year, month, 1 + offset + (n - 1) * 7);
+  }
+  const y = new Date().getFullYear();
+  document.getElementById('md').textContent = nthSunday(y, 4, 2).toLocaleDateString(undefined, {
+    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+  });
+  document.getElementById('year').textContent = y;
+</script>
+</body>
+</html>

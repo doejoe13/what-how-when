@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What Is My IP? — Your Public IP Address</title>
+<meta name="description" content="See your public IP address and approximate location instantly.">
+<link rel="canonical" href="https://what-how-when.top/what/is-my-ip/">
+<link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+<nav class="breadcrumb"><a href="/">← Most Useful Webpage in the Universe</a></nav>
+<main class="subpage">
+  <h1>What is my IP?</h1>
+  <div class="quick-answer"><strong>Your public IP:</strong> <span id="ip">Loading…</span></div>
+  <section>
+    <h2>Details</h2>
+    <p id="loc">Approximate location: —</p>
+    <p>This is the IP address websites see when you connect. It may be shared with other users on your network or ISP.</p>
+  </section>
+</main>
+<footer class="site-footer"><p>© <span id="year"></span> what-how-when.top</p></footer>
+<script>
+  (async () => {
+    try {
+      const r = await fetch('https://api.ipify.org?format=json');
+      document.getElementById('ip').textContent = (await r.json()).ip;
+    } catch {
+      document.getElementById('ip').textContent = 'Unavailable';
+    }
+    try {
+      const r2 = await fetch('https://ipapi.co/json/');
+      const d = await r2.json();
+      const parts = [d.city, d.region, d.country_name].filter(Boolean);
+      if (parts.length) {
+        document.getElementById('loc').textContent = 'Approximate location: ' + parts.join(', ');
+      }
+    } catch {}
+  })();
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

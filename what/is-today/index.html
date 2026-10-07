@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What Is Today? — Today's Date & Day of the Week</title>
+<meta name="description" content="See today's date instantly, localized to your time zone: full weekday, month, day, and year.">
+<link rel="canonical" href="https://what-how-when.top/what/is-today/">
+<link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+<nav class="breadcrumb"><a href="/">← Most Useful Webpage in the Universe</a></nav>
+<main class="subpage">
+  <h1>What is today?</h1>
+  <div class="quick-answer"><strong>Today is:</strong> <span id="today-live">Loading…</span></div>
+  <section>
+    <h2>Details</h2>
+    <p>Today's date is shown above based on your device's time zone. It updates automatically if you keep the page open across midnight.</p>
+    <p>Your current time zone is <strong id="tz">—</strong>.</p>
+  </section>
+</main>
+<footer class="site-footer"><p>© <span id="year"></span> what-how-when.top</p></footer>
+<script>
+  const update = () => {
+    const d = new Date();
+    document.getElementById('today-live').textContent = d.toLocaleDateString(undefined, {
+      weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+    });
+    document.getElementById('tz').textContent = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  };
+  update();
+  setInterval(update, 30000);
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

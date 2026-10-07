@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Where Am I? — Your Approximate Location</title>
+<meta name="description" content="Find your approximate location by IP and precise location via browser geolocation.">
+<link rel="canonical" href="https://what-how-when.top/where/am-i/">
+<link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+<nav class="breadcrumb"><a href="/">← Most Useful Webpage in the Universe</a></nav>
+<main class="subpage">
+  <h1>Where am I?</h1>
+  <div class="quick-answer"><strong>Approximate location (by IP):</strong> <span id="loc">Loading…</span></div>
+  <section>
+    <h2>Precise location (optional)</h2>
+    <p>Click below to let the browser request your exact position. Nothing is sent to our server — everything runs in your browser.</p>
+    <button onclick="geo()" style="padding:.5rem 1rem;border-radius:8px;border:1px solid #334155;background:#1e293b;color:#e2e8f0;cursor:pointer;">Get precise location</button>
+    <p id="geo-out" style="margin-top:1rem;"></p>
+  </section>
+</main>
+<footer class="site-footer"><p>© <span id="year"></span> what-how-when.top</p></footer>
+<script>
+  (async () => {
+    try {
+      const r = await fetch('https://ipapi.co/json/');
+      const d = await r.json();
+      const parts = [d.city, d.region, d.country_name].filter(Boolean);
+      document.getElementById('loc').textContent = parts.length ? parts.join(', ') : 'Unavailable';
+    } catch {
+      document.getElementById('loc').textContent = 'Unavailable';
+    }
+  })();
+  function geo() {
+    const out = document.getElementById('geo-out');
+    if (!navigator.geolocation) { out.textContent = 'Geolocation not supported.'; return; }
+    out.textContent = 'Requesting…';
+    navigator.geolocation.getCurrentPosition(
+      p => { out.textContent = 'Latitude: ' + p.coords.latitude.toFixed(5) + ', Longitude: ' + p.coords.longitude.toFixed(5); },
+      e => { out.textContent = 'Error: ' + e.message; }
+    );
+  }
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

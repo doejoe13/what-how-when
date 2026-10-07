@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>When Is the Next Full Moon? — Approximate Date</title>
+<meta name="description" content="Approximate date of the next full moon, based on the lunar cycle.">
+<link rel="canonical" href="https://what-how-when.top/when/is-the-next-full-moon/">
+<link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+<nav class="breadcrumb"><a href="/">← Most Useful Webpage in the Universe</a></nav>
+<main class="subpage">
+  <h1>When is the next full moon?</h1>
+  <div class="quick-answer"><strong>Next full moon (approx.):</strong> <span id="next-moon">…</span></div>
+  <section>
+    <h2>How this is calculated</h2>
+    <p>The Moon's cycle averages 29.53 days. A known reference full moon (2000-01-06 18:14 UTC) is used as a base, and the interval is extended forward to the next occurrence.</p>
+    <p>For precision (minutes-level), use an ephemeris source — dates here can be off by a few hours depending on your time zone.</p>
+  </section>
+</main>
+<footer class="site-footer"><p>© <span id="year"></span> what-how-when.top</p></footer>
+<script>
+  function nextFullMoon(from) {
+    const SYNODIC = 29.530588853 * 86400000;
+    const KNOWN = Date.UTC(2000, 0, 6, 18, 14, 0);
+    const diff = from.getTime() - KNOWN;
+    const periods = Math.ceil(diff / SYNODIC);
+    return new Date(KNOWN + periods * SYNODIC);
+  }
+  const nm = nextFullMoon(new Date());
+  document.getElementById('next-moon').textContent = nm.toLocaleDateString(undefined, {
+    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+  }) + ' ' + nm.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

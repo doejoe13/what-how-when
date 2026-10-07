@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>When Is Father's Day? — US Date for Any Year</title>
+<meta name="description" content="Father's Day date in the United States: the third Sunday in June. Calculated live.">
+<link rel="canonical" href="https://what-how-when.top/when/is-fathers-day/">
+<link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+<nav class="breadcrumb"><a href="/">← Most Useful Webpage in the Universe</a></nav>
+<main class="subpage">
+  <h1>When is Father's Day?</h1>
+  <div class="quick-answer"><strong>Father's Day this year (US):</strong> <span id="fd">…</span></div>
+  <section>
+    <h2>Rule</h2>
+    <p>In the United States, Father's Day is the <strong>third Sunday of June</strong>. Many other countries use the same date; the UK and Ireland use the third Sunday of June as well.</p>
+  </section>
+</main>
+<footer class="site-footer"><p>© <span id="year"></span> what-how-when.top</p></footer>
+<script>
+  function nthSunday(year, month, n) {
+    const first = new Date(year, month, 1);
+    const offset = (7 - first.getDay()) % 7;
+    return new Date(year, month, 1 + offset + (n - 1) * 7);
+  }
+  const y = new Date().getFullYear();
+  document.getElementById('fd').textContent = nthSunday(y, 5, 3).toLocaleDateString(undefined, {
+    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+  });
+  document.getElementById('year').textContent = y;
+</script>
+</body>
+</html>
